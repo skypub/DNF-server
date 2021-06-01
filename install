@@ -1,0 +1,30 @@
+echo "欢迎使用地下城与勇士服务端安装脚本，作者：与你的明日"
+echo "进行下一步之前，请先确定你的系统为CentOS 5.X 64bit，否则请按Ctrl+C退出安装脚本"
+read -p "请输入你的IP: " ip
+IP=$ip
+read -p "服务端一共需要8G内存才能较好地运行起来，即物理内存+虚拟内存≥8GB，请输入你需要创建多少MB的虚拟内存（1GB=1024MB，输入整数）: " swap
+Swap=$swap
+cd /
+tar -zxvf Package.tar.gz
+cd /home/neople/channel
+sed -i "s/Public IP/${IP}/g" `find . -type f -name "*.cfg"`
+cd /home/neople/game
+sed -i "s/Public IP/${IP}/g" `find . -type f -name "*.cfg"`
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux
+setenforce 0
+echo "正在创建虚拟内存，请耐心等待。"
+dd if=/dev/zero of=/mnt/swap bs=1M count=${Swap}
+mkswap /mnt/swap
+swapon /mnt/swap
+sed -i '$a /mnt/swap swap swap defaults 0 0' /etc/fstab
+service iptables stop
+chkconfig iptables off
+cd
+echo "地下城与勇士服务端已经安装完毕了！"
+echo "启动服务端命令为“./run”，关闭命令为“./stop”"
+echo "数据库默认帐号为“game”"
+echo "数据库默认密码为“uu5!^%jg”"
+echo "php目录为：“/opt/lampp/htdocs"
+echo "数据库目录为“/opt/lampp/var/mysql”"
+echo 1 > /proc/sys/vm/drop_caches
+reboot
