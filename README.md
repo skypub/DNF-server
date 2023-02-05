@@ -1,5 +1,5 @@
 # DNF-server /台服DNF服务端
-- 服务端系统请基于 Linux centos 5.8版本 进行搭建
+- 服务端系统请基于 Linux centos 5.8版本 进行搭建 [如果 使用高于centos5系 系统 请输入 grubby --update-kernel=ALL --args=highres=off ]
 - 上传 Package.tar install 文件到跟目录下并给予777权限
 - 启动指令：cd /;chmod -R 0777 /install;bash install
 - 虚拟内存设置建议为 8192MB
