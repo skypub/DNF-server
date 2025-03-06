@@ -6,7 +6,7 @@
 - IP为您的外网IP&内网IP
 - 之后脚本会自动搭建完毕后会自动重启服务端系统
 - 上传生成的你的密钥文件 publickey.pem
-- [注：使用高于centos5系 6系7系及以上]
+- [注：如果使用高于centos5系 6系7系及以上 需要附加如下操作]
 - 关闭CPU高精度 重启生效
 - grubby --update-kernel=ALL --args=highres=off 
 - 补全安装支持库
